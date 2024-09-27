@@ -1,20 +1,36 @@
-﻿// Sorting.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
+﻿#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+#include "headerFile.h"
 
-#include <iostream>
-
-int main()
-{
-    std::cout << "Hello World!\n";
+void startingTask(char taskNumber) {
+    if (taskNumber == '1') {
+        theMostCommonElementTask();
+    }
+    if (taskNumber == '2') {
+        searchTask();
+    }
+    if (taskNumber == '3') {
+        smartQSortTask();
+    }
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
+bool testInputCorrectnessForMain(const char* taskNumber) {
+    size_t lengthTaskNumber = strlen(taskNumber);
+    return (*taskNumber == '0') ? true : false;
+    return (strlen(taskNumber) > 1) ? true : false;
+}
 
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
+int main() {
+    char taskNumber = '0';
+    printf("Enter the task number from 1 to 4:\n");
+    scanf("%[0123456789]", &taskNumber);
+
+    if (testInputCorrectnessForMain(&taskNumber)) {
+        printf("Input error");
+        return 1;
+    }
+
+    startingTask(taskNumber);
+    return 0;
+}

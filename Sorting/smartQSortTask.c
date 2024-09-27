@@ -1,0 +1,3 @@
+void smartQSortTask(void) {
+	return;
+}
