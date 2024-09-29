@@ -1,7 +1,7 @@
-﻿#include <stdio.h>
-#include <stdbool.h>
+﻿#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "headerFile.h"
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -19,7 +19,7 @@ void startingTask(int taskNumber) {
         // smartQSortTask();
     }
     else {
-        printf("Incorrect task number!\n");
+        printf("Incorrect task number\n");
     }
 }
 
@@ -33,9 +33,8 @@ int main() {
         printf("Input error\n");
         return 1;
     }
-    strTaskNumber[strcspn(strTaskNumber, "\n")] = '\0';
 
-    taskNumber = (int)strtol(strTaskNumber, &endptrTaskNumber, 10);
+    taskNumber = strtol(strTaskNumber, &endptrTaskNumber, 10);
     if (taskNumber <= 0 || taskNumber >= 4 || *endptrTaskNumber != '\0') {
         printf("Incorrect task number\n");
         return 1;
