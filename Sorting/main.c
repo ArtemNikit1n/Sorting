@@ -1,33 +1,40 @@
-﻿#include <stdio.h>
-#include <stdbool.h>
+﻿#include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "headerFile.h"
 
-void startingTask(char taskNumber) {
-    if (taskNumber == '1') {
-        theMostCommonElementTask();
+#define _CRT_SECURE_NO_WARNINGS
+
+void startingTask(short taskNumber) {
+    if (taskNumber == 1) {
+         theMostCommonElementTask();
     }
-    if (taskNumber == '2') {
+    else if (taskNumber == 2) {
         searchTask();
     }
-    if (taskNumber == '3') {
-        smartQSortTask();
+    else if (taskNumber == 3) {
+         smartQSortTask();
     }
-}
-
-bool testInputCorrectnessForMain(const char* taskNumber) {
-    size_t lengthTaskNumber = strlen(taskNumber);
-    return (*taskNumber == '0') ? true : false;
-    return (strlen(taskNumber) > 1) ? true : false;
+    else {
+        printf("Incorrect task number\n");
+    }
 }
 
 int main() {
-    char taskNumber = '0';
-    printf("Enter the task number from 1 to 4:\n");
-    scanf("%[0123456789]", &taskNumber);
+    char strTaskNumber[2];
+    char* endptrTaskNumber = NULL;
+    short taskNumber = 0;
 
-    if (testInputCorrectnessForMain(&taskNumber)) {
-        printf("Input error");
+    printf("Enter the task number from 1 to 3:\n");
+    if (fgets(strTaskNumber, sizeof(strTaskNumber), stdin) == NULL) {
+        printf("Input error\n");
+        return 1;
+    }
+
+    taskNumber = strtol(strTaskNumber, &endptrTaskNumber, 10);
+    if (taskNumber <= 0 || taskNumber >= 4 || *endptrTaskNumber != '\0') {
+        printf("Incorrect task number\n");
         return 1;
     }
 
