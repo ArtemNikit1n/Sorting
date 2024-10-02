@@ -1,19 +1,19 @@
 ﻿#include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <stdio.h>
-﻿#include <stdbool.h>
 #include "headerFile.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 
 bool startingTask(short taskNumber, bool errorCode) {
     if (taskNumber == 1) {
-        //errorCode = theMostCommonElementTask();
-        //return errorCode;
+        errorCode = theMostCommonElementTask();
+        return errorCode;
     }
     else if (taskNumber == 2) {
-        //errorCode = searchTask();
-        //return errorCode;
+        errorCode = searchTask();
+        return errorCode;
     }
     else if (taskNumber == 3) {
         errorCode = smartQSortTask();

@@ -1,5 +1,5 @@
 #include <stdbool.h>
 
 bool smartQSortTask(void) {
-	return;
+	return false;
 }

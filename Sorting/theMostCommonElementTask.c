@@ -1,5 +1,5 @@
 #include <stdbool.h>
 
 bool theMostCommonElementTask(void) {
-	return;
+	return false;
 }
