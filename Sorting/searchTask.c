@@ -1,4 +1,5 @@
 
-void searchTask(void) {
+
+bool searchTask(void) {
 	return;
 }

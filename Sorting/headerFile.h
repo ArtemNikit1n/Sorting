@@ -1,6 +1,6 @@
-void theMostCommonElementTask(void); // 1
+bool theMostCommonElementTask(void); // 1
 
-void searchTask(void); // 2
+bool searchTask(void); // 2
 
-void smartQSortTask(void); // 3
+bool smartQSortTask(void); // 3
 
