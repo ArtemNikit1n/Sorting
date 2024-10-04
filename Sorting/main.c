@@ -1,6 +1,6 @@
-﻿#include <stdbool.h>
-#include <stdlib.h>
+﻿#include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include "headerFile.h"
 
@@ -8,16 +8,16 @@
 
 bool startingTask(short taskNumber, bool errorCode) {
     if (taskNumber == 1) {
-        //errorCode = theMostCommonElementTask();
-        //return errorCode;
+        errorCode = theMostCommonElementTask();
+        return errorCode;
     }
     else if (taskNumber == 2) {
-        //errorCode = searchTask();
-        //return errorCode;
+        errorCode = searchTask();
+        return errorCode;
     }
     else if (taskNumber == 3) {
-         errorCode = smartQSortTask();
-         return errorCode;
+        errorCode = smartQSortTask();
+        return errorCode;
     }
     else {
         printf("Incorrect task number\n");

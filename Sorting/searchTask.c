@@ -1,4 +1,5 @@
+#include <stdbool.h>
 
-void searchTask(void) {
-	return;
+bool searchTask(void) {
+	return false;
 }
