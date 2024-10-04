@@ -13,7 +13,7 @@ void swap(int* first, int* second) {
 }
 
 void insertionSort(int array[], int start, int stop) {
-    for (int i = start + 1; i < stop; ++i) {
+    for (int i = start + 1; i <= stop; ++i) {
         int indexSave = i;
         int insertableElement = array[i];
         while (array[i] < array[i - 1] && start < i) {
@@ -25,38 +25,39 @@ void insertionSort(int array[], int start, int stop) {
 }
 
 int halfQSort(int array[], int startArray, int endArray) {
-    //int j = startArray + 1;
-    //while (startArray == j) {
-    //    ++j;
-    //}
-    //startArray = (max(array[startArray], array[j]) == array[startArray]) ? startArray : j;
+    int randomIndex = startArray + rand() % (endArray - startArray + 1);
+    swap(&array[startArray], &array[randomIndex]);
+
     int supportingElement = array[startArray];
-    int indexSupportingElement = startArray;
-    for (int i = indexSupportingElement + 1; i < endArray; ++i) {
-        if (supportingElement > array[i]) {
-            swap(&array[i - 1], &array[i]);
-            ++indexSupportingElement;
-        }
-        else {
-            swap(&array[i], &array[endArray - 1]);
-            --endArray;
-            --i;
+    int leftPart = startArray + 1;
+
+    for (int rightPart = startArray + 1; rightPart <= endArray; ++rightPart) {
+        if (array[rightPart] < supportingElement) {
+            swap(&array[leftPart], &array[rightPart]);
+            ++leftPart;
         }
     }
-    return indexSupportingElement;
+    swap(&array[startArray], &array[leftPart - 1]);
+    return leftPart - 1;
 }
 
 void smartQSort(int array[], int start, int stop) {
     if (start < stop) {
-        if (stop - start > 10) {
+        if (stop - start > 0) {
             int supportingIndex = halfQSort(array, start, stop);
-            smartQSort(array, start, supportingIndex - 1);
-            smartQSort(array, supportingIndex + 1, stop);
+
+            if (supportingIndex - 1 > start) {
+                smartQSort(array, start, supportingIndex - 1);
+            }
+            if (supportingIndex + 1 < stop) {
+                smartQSort(array, supportingIndex + 1, stop);
+            }
         }
-        else {
+        if (stop - start <= 10) {
             insertionSort(array, start, stop);
         }
     }
+
 }
 
 void generatingRandomArrays(int randomArray[], int arrayLength) {
@@ -65,9 +66,11 @@ void generatingRandomArrays(int randomArray[], int arrayLength) {
     }
 }
 
-bool testSmartQSort(int array[], int start, int stop) {
-    for (int i = start; i < stop - 1; ++i) {
-        if (array[i] > array[i + 1]) {
+bool testSmartQSort() {
+    int testArray[21] = { 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    smartQSort(testArray, 0, 20);
+    for (int i = 0; i < 20; ++i) {
+        if (testArray[i] > testArray[i + 1]) {
             return false;
         }
     }
@@ -81,6 +84,12 @@ bool smartQSortTask(void) {
     int array[1000] = { 0 };
     int arrayLength = -1;
     bool errorCode = false;
+
+    if (!testSmartQSort()) {
+        errorCode = true;
+        printf("Test failed");
+        return errorCode;
+    }
 
     printf("Enter the array size:\n");
     scanf("%s", strArrayLength);
@@ -99,11 +108,10 @@ bool smartQSortTask(void) {
         printf("%d ", array[i]);
     }
 
-    smartQSort(array, 0, arrayLength);
+    smartQSort(array, 0, arrayLength - 1);
     printf("\nSorted array: ");
     for (int i = 0; i < arrayLength; ++i) {
         printf("%d ", array[i]);
     }
-    printf("\nTest result: %d", testSmartQSort(array, 0, arrayLength));
     return errorCode;
 }
