@@ -48,7 +48,7 @@ int search(int searchArea[], int desiredNumbersArray[], int searchAreaLength, in
             } else {
                 averageIndex = calculatingTheMiddle(averageIndex, previousIndex);
             }
-        } 
+        }
     }
     return theNumberOfElementsContainedInTheArray;
 }
