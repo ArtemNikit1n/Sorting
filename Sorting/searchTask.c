@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include "headerFile.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -17,12 +17,6 @@ int calculatingTheMean(int length) {
 
 int search(int totalNumbersArray[], int requiredNumbersArray[], int totalNumbers, int requiredNumbers) {
     return;
-}
-
-void generatingRandomArrays(int randomArray[], int arrayLength) {
-    for (int i = 0; i < arrayLength; ++i) {
-        randomArray[i] = rand() % 100;
-    }
 }
 
 void searchTask(void) {
