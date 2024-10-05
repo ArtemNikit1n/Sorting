@@ -1,3 +1,5 @@
-void theMostCommonElementTask(void) {
-	return;
+#include <stdbool.h>
+
+bool theMostCommonElementTask(void) {
+	return false;
 }
