@@ -10,7 +10,7 @@
 int calculatingTheMean(int length) {
     if (length % 2 == 0) {
         return length / 2;
-    } else{
+    } else {
         return (int)(length / 2);
     }
 }
@@ -54,6 +54,4 @@ void searchTask(void) {
     srand(time(NULL));
     generatingRandomArrays(totalNumbersArray, totalNumbers);
     generatingRandomArrays(requiredNumbersArray, requiredNumbers);
-
-    printf("%d", calculatingTheMean(5));
 }
