@@ -29,20 +29,30 @@ void searchTask(void) {
     int requiredNumbers = -1;
     int totalNumbersArray[1000] = { 0 };
     int requiredNumbersArray[1000] = { 0 };
+    bool errorCode = false;
 
     printf("Enter a total number of numbers less than 1000:\n");
     scanf("%s", strTotalNumbers);
     totalNumbers = strtol(strTotalNumbers, &endptrTotalNumbers, 10);
-    assert(totalNumbers > 0 && totalNumbers < 1000);
+    if (totalNumbers <= 0 && totalNumbers >= 1000) {
+        printf("Input error");
+        errorCode = true;
+        return errorCode;
+    }
 
     printf("Enter the number of numbers less than 1000 you want to find:\n");
     scanf("%s", strRequiredNumbers);
     requiredNumbers = strtol(strRequiredNumbers, &endptrRequiredNumbers, 10);
-    assert(requiredNumbers > 0 && requiredNumbers < 1000);
+    if (requiredNumbers <= 0 && requiredNumbers >= 1000) {
+        printf("Input error");
+        errorCode = true;
+        return errorCode;
+    }
 
     if (*endptrRequiredNumbers != '\0' || *endptrTotalNumbers != '\0') {
         printf("Input error");
-        return;
+        errorCode = true;
+        return errorCode;
     }
 
     srand(time(NULL));
