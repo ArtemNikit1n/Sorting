@@ -1,23 +1,28 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "headerFile.h"
 
-int compare(int* a, int* b) {
-    if (*a < *b) {
-        return -1;
-    }
-    else if (*a > *b) {
-        return 1;
-    }
-    else {
-        return 0;
-    }
-}
+#define _CRT_SECURE_NO_WARNINGS
 
-void generatingRandomArrays(int randomArray[], int arrayLength) {
-    for (int i = 0; i < arrayLength; ++i) {
-        randomArray[i] = rand() % 100;
+int findTheMostCommonElement(int array[], int arrayLength) {
+    int maximumLineLength = 1;
+    int currentLengthOfTheString = 1;
+    int theMostCommonElement = -1;
+    for (int i = 0; i + 1 < arrayLength; ++i) {
+        int j = i + 1;
+        while (array[i] == array[j]) {
+            ++currentLengthOfTheString;
+            ++j;
+        }
+        if (max(currentLengthOfTheString, maximumLineLength) != maximumLineLength) {
+            theMostCommonElement = array[i];
+        }
+        maximumLineLength = max(currentLengthOfTheString, maximumLineLength);
+        currentLengthOfTheString = 1;
+        i = j;
     }
+    return theMostCommonElement;
 }
 
 bool theMostCommonElementTask(void) {
@@ -45,11 +50,13 @@ bool theMostCommonElementTask(void) {
         printf("%d ", array[i]);
     }
 
-    qsort(array, arrayLength, sizeof(int), compare);
+    smartQSort(array, 0, arrayLength - 1);
 
     printf("\nSorted array: ");
-    for (size_t i = 0; i < arrayLength; i++) {
+    for (int i = 0; i < arrayLength; i++) {
         printf("%d ", array[i]);
     }
+
+    printf("\nThe most common element: %d", findTheMostCommonElement(array, arrayLength));
     return false;
 }
