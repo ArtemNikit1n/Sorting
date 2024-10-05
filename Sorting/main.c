@@ -1,36 +1,50 @@
-﻿#include <stdio.h>
-#include <stdbool.h>
+﻿#include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include <stdio.h>
 #include "headerFile.h"
 
-void startingTask(char taskNumber) {
-    if (taskNumber == '1') {
-        theMostCommonElementTask();
-    }
-    if (taskNumber == '2') {
-        searchTask();
-    }
-    if (taskNumber == '3') {
-        smartQSortTask();
-    }
-}
+#define _CRT_SECURE_NO_WARNINGS
 
-bool testInputCorrectnessForMain(const char* taskNumber) {
-    size_t lengthTaskNumber = strlen(taskNumber);
-    return (*taskNumber == '0') ? true : false;
-    return (strlen(taskNumber) > 1) ? true : false;
+bool startingTask(short taskNumber, bool errorCode) {
+    if (taskNumber == 1) {
+        errorCode = theMostCommonElementTask();
+        return errorCode;
+    }
+    else if (taskNumber == 2) {
+        errorCode = searchTask();
+        return errorCode;
+    }
+    else if (taskNumber == 3) {
+        errorCode = smartQSortTask();
+        return errorCode;
+    }
+    else {
+        printf("Incorrect task number\n");
+        errorCode = true;
+        return errorCode;
+    }
 }
 
 int main() {
-    char taskNumber = '0';
-    printf("Enter the task number from 1 to 4:\n");
-    scanf("%[0123456789]", &taskNumber);
+    char strTaskNumber[2];
+    char* endptrTaskNumber = NULL;
+    short taskNumber = 0;
+    bool errorCode = false;
 
-    if (testInputCorrectnessForMain(&taskNumber)) {
-        printf("Input error");
-        return 1;
+    printf("Enter the task number from 1 to 3:\n");
+    if (fgets(strTaskNumber, sizeof(strTaskNumber), stdin) == NULL) {
+        printf("Input error\n");
+        errorCode = true;
+        return errorCode;
     }
 
-    startingTask(taskNumber);
-    return 0;
+    taskNumber = strtol(strTaskNumber, &endptrTaskNumber, 10);
+    if (taskNumber <= 0 || taskNumber >= 4 || *endptrTaskNumber != '\0') {
+        printf("Incorrect task number\n");
+        errorCode = true;
+        return errorCode;
+    }
+
+    return startingTask(taskNumber, errorCode);
 }
