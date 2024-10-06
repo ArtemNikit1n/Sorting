@@ -7,10 +7,6 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-int calculatingTheMiddle(start, stop) {
-    return (int)((start - stop) / 2);
-}
-
 int search(int searchArea[], int desiredNumbersArray[], int searchAreaLength, int desiredNumbers) {
     smartQSort(searchArea, 0, searchAreaLength - 1);
 
