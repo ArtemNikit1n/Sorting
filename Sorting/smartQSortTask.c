@@ -95,7 +95,7 @@ bool smartQSortTask(void) {
     scanf("%s", strArrayLength);
     arrayLength = (int)strtol(strArrayLength, &endptrArrayLength, 10);
 
-    if (arrayLength > 1000 || arrayLength < 1) {
+    if (arrayLength > 1000 || arrayLength < 1 || *endptrArrayLength != '\0') {
         printf("Invalid array value");
         errorCode = true;
         return errorCode;
