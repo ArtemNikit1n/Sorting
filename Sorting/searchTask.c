@@ -14,40 +14,38 @@ int calculatingTheMiddle(start, stop) {
 int search(int searchArea[], int desiredNumbersArray[], int searchAreaLength, int desiredNumbers) {
     smartQSort(searchArea, 0, searchAreaLength - 1);
 
-    int averageIndex = (int)((searchAreaLength - 1) / 2);
-    int previousIndex = -1;
+    int start = 0;
+    int stop = searchAreaLength - 1;
     int theNumberOfElementsContainedInTheArray = 0;
     int i = 0; 
-    while (averageIndex >= 0 && averageIndex < searchAreaLength && i < desiredNumbers) {
+
+    while (i < desiredNumbers) {
+        if (start > stop) {
+            ++i;
+            start = 0;
+            stop = searchAreaLength - 1;
+        }
+        int averageIndex = (int)((start + stop) / 2);
         if (searchArea[averageIndex] == desiredNumbersArray[i]) {
             ++theNumberOfElementsContainedInTheArray;
             int j = 1;
-            while (searchArea[averageIndex + j] == desiredNumbersArray[i]) {
+            while (searchArea[averageIndex + j] == desiredNumbersArray[i] && averageIndex + j < searchAreaLength) {
                 ++j;
                 ++theNumberOfElementsContainedInTheArray;
             }
             j = -1;
-            while (searchArea[averageIndex + j] == desiredNumbersArray[i]) {
+            while (searchArea[averageIndex + j] == desiredNumbersArray[i] && averageIndex + j > 0) {
                 --j;
                 ++theNumberOfElementsContainedInTheArray;
             }
             ++i;
+            start = 0;
+            stop = searchAreaLength - 1;
         }
         else if (searchArea[averageIndex] < desiredNumbersArray[i]) {
-            if (previousIndex < averageIndex) {
-                previousIndex = averageIndex;
-                averageIndex = calculatingTheMiddle(averageIndex, searchAreaLength);
-            }
-            else {
-                averageIndex = calculatingTheMiddle(averageIndex, previousIndex);
-            }
+            start = averageIndex + 1;
         } else {
-            if (previousIndex > averageIndex) {
-                previousIndex = averageIndex;
-                averageIndex = calculatingTheMiddle(averageIndex, 0);
-            } else {
-                averageIndex = calculatingTheMiddle(averageIndex, previousIndex);
-            }
+            stop = averageIndex - 1;
         }
     }
     return theNumberOfElementsContainedInTheArray;
@@ -56,8 +54,8 @@ int search(int searchArea[], int desiredNumbersArray[], int searchAreaLength, in
 bool testSearch() {
     int testSearchArea[9] = { 1, 2, 3, 3, 3, 4, 5, 5, 6 };
     int test1DesiredNumbersArray[2] = { 1, 6 };
-    int test2DesiredNumbersArray[2] = { 4, 3 };
-    return (search(testSearchArea, test1DesiredNumbersArray, 9, 2) == 2 && search(testSearchArea, test2DesiredNumbersArray, 9, 2) == 4);
+    int test2DesiredNumbersArray[3] = { 4, 3, 5 };
+    return (search(testSearchArea, test1DesiredNumbersArray, 9, 2) == 2 && search(testSearchArea, test2DesiredNumbersArray, 9, 3) == 6);
 }
 
 bool searchTask(void) {
@@ -75,7 +73,7 @@ bool searchTask(void) {
     if (!testSearch()) {
         printf("Test failed\n");
         errorCode = true;
-        //return errorCode;
+        return errorCode;
     }
 
     printf("Enter a total number of numbers less than 1000:\n");
